@@ -1,59 +1,61 @@
 body {
+    font-size: 12pt;
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
-
 .container {
-    max-width: 650px;
-    min-width: 350px;
+    max-width: 850px;
+    min-width: 600px;
     margin: 0 auto;
-    padding: 10px;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-
-.center-text {
-    font-size: 30px;
-    text-align: center;
     position: relative;
-    left:0;
-    right:0;
-    flex-grow: 1;
 }
-
-
-.left-list, .right-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.header {
+    text-align: center;
+    padding: 0px 0;
 }
-
+.header h1 {
+    font-size: 30px;
+    margin: 10px;
+}
 .left-list {
-    text-align: left;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
-
 .right-list {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
     text-align: right;
 }
-
-.left-right {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0px;
-}
-
 .section-title {
-    display: flex;
-    justify-content: space-between;
+    font-weight: bold;
+    font-size: 16pt;
+    float:left;
+    margin-bottom: 8px;
+}
+.left-right {
+    clear: both;
+    overflow: hidden;
+    margin: 0px;
+    margin-bottom: 4px;
+}
+.info-left {
+    float: left;
+}
+.info-right {
+    float: right;
+}
+.bottom-list {
+    list-style: "▸  ";
+    clear: both;
+    padding-left: 15px;
     margin-top: 0px;
 }
 
-.bottom-list {
-    list-style-type: "▸ ";
-    padding-left: 20px;
-    margin-top: 0px;
-}
