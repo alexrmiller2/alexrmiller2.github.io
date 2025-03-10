@@ -53,9 +53,8 @@ body {
     float: right;
 }
 .bottom-list {
-    list-style: "▸  ";
+    list-style: none;
     clear: both;
-    padding-left: 15px;
+    padding-left: 0px;
     margin-top: 0px;
 }
-
