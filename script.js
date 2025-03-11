@@ -1,5 +1,27 @@
-const ctx = document.getElementById("myCanvas").getContext("2d");
+function setupCanvas(canvas) {
+    // Get the device pixel ratio, falling back to 1.
+    var dpr = window.devicePixelRatio || 1;
+    // Get the size of the canvas in CSS pixels.
+    var rect = canvas.getBoundingClientRect();
+    // Give the canvas pixel dimensions of their CSS
+    // size * the device pixel ratio.
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    var ctx = canvas.getContext('2d');
+    // Scale all drawing operations by the dpr, so you
+    // don't have to worry about the difference.
+    ctx.scale(dpr, dpr);
+    return ctx;
+  }
+  
+  // Now this line will be the same size on the page
+  // but will look sharper on high-DPI devices!
+const ctx = setupCanvas(document.getElementById("myCanvas"));
+
+//const ctx = document.getElementById("myCanvas").getContext("2d");
 canvas = document.getElementById("myCanvas");
+
+ctx.imageSmoothingEnabled = true;
 
 const containerElement = document.body.getElementsByClassName("container")[0];
 const containerCoords = containerElement.getBoundingClientRect();
@@ -8,8 +30,9 @@ const title = document.body.getElementsByClassName("header")[0].childNodes[1];
 
 let Letters = [];
 
-const gravity = 1000090;
-const drag = .01;
+const mouseStrength = 0;
+const gravity = .51;
+const drag = .1;
 
 let mouse = { x: 0, y: 0 };
 
@@ -17,13 +40,14 @@ canvas.addEventListener('mousemove', (event) => {
     mouse.x = event.clientX - canvas.offsetLeft;
     mouse.y = event.clientY - canvas.offsetTop;
 });
+//
 
 class Letter {
     constructor(letter, font, x, y, velx, vely) {
         this.x = x;
         this.y = y;
         this.letter = letter;
-        this.rotation = 0;
+        this.rotation = 0.03;
         this.radius = 1;
         this.velocityX = velx;
         this.velocityY = vely;
@@ -36,11 +60,13 @@ class Letter {
         let distance = Math.sqrt(dx * dx + dy * dy);
         let angle = Math.atan2(dy, dx);
 
-        let ddx = Math.max(-10, Math.min(10, (gravity*Math.cos(angle)/(distance*distance))));
-        let ddy = Math.max(-10, Math.min(10,(gravity*Math.sin(angle)/(distance*distance))));
+        //let ddx = Math.max(-10, Math.min(10, (mouseStrength*Math.cos(angle)/(distance*distance))));
+        //let ddy = Math.max(-10, Math.min(10,(mouseStrength*Math.sin(angle)/(distance*distance))));
 
-        this.x += (this.velocityX+ddx)*drag;
-        this.y += (this.velocityY+ddy)*drag;
+        this.velocityY += gravity;
+
+        this.x += (this.velocityX)*drag;
+        this.y += (this.velocityY)*drag;
 
         if (this.y + this.radius > canvas.height) {
             this.y = canvas.height - this.radius;
