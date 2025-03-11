@@ -1,23 +1,69 @@
 const ctx = document.getElementById("myCanvas").getContext("2d");
+canvas = document.getElementById("myCanvas");
 
 const containerElement = document.body.getElementsByClassName("container")[0];
 const containerCoords = containerElement.getBoundingClientRect();
 
 const title = document.body.getElementsByClassName("header")[0].childNodes[1];
 
+let Letters = [];
+
+const gravity = 1000090;
+const drag = .01;
+
+let mouse = { x: 0, y: 0 };
+
+canvas.addEventListener('mousemove', (event) => {
+    mouse.x = event.clientX - canvas.offsetLeft;
+    mouse.y = event.clientY - canvas.offsetTop;
+});
+
 class Letter {
-    constructor(letter, x, y) {
+    constructor(letter, font, x, y, velx, vely) {
         this.x = x;
         this.y = y;
         this.letter = letter;
         this.rotation = 0;
         this.radius = 1;
-        this.velx = 0;
-        this.vely = 0;
+        this.velocityX = velx;
+        this.velocityY = vely;
+        this.font = font;
+    }
+
+    update() {
+        let dx = this.x - mouse.x;
+        let dy = this.y - mouse.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let angle = Math.atan2(dy, dx);
+
+        let ddx = Math.max(-10, Math.min(10, (gravity*Math.cos(angle)/(distance*distance))));
+        let ddy = Math.max(-10, Math.min(10,(gravity*Math.sin(angle)/(distance*distance))));
+
+        this.x += (this.velocityX+ddx)*drag;
+        this.y += (this.velocityY+ddy)*drag;
+
+        if (this.y + this.radius > canvas.height) {
+            this.y = canvas.height - this.radius;
+            this.velocityY *= -1;
+        }
+        if (this.y - this.radius < 0) {
+            this.y = this.radius;
+            this.velocityY *= -1;
+        }
+        if (this.x + this.radius > canvas.width) {
+            this.x = canvas.width - this.radius;
+            this.velocityX *= -1;
+        }
+        if (this.x - this.radius < 0) {
+            this.x = this.radius;
+            this.velocityX *= -1;
+        }
+        
     }
     
     draw() {
         ctx.save();
+        ctx.font = this.font;
         const textMetrics = ctx.measureText(this.letter);
         const centerX = this.x + textMetrics.width / 2;
         const centerY = this.y - textMetrics.actualBoundingBoxAscent / 2;
@@ -43,8 +89,7 @@ function drawText(element, startX, startY, scaling = 1, lineHeight = 18) {
             charWidth += ctx.measureText(element.textContent[i - 1]).width;
         }
 
-        let l = new Letter(element.textContent[i],startX + charWidth * scaling, currentY);
-        l.draw();
+        Letters.push(new Letter(element.textContent[i],ctx.font,startX + charWidth * scaling, currentY, 0, 0));
     }
 }
 
@@ -89,9 +134,24 @@ const bottomListElements = document.getElementsByClassName("bullet");
 for (let i = 0; i < bottomListElements.length; i++) {
     const bottomListCoords = bottomListElements[i].getBoundingClientRect();
 
-    let bullet = new Letter("• ", bottomListCoords.left - containerCoords.left - 10,bottomListCoords.top - containerCoords.top+14)
-    bullet.draw()
+    Letters.push(new Letter("• ", ctx.font, bottomListCoords.left - containerCoords.left - 10,bottomListCoords.top - containerCoords.top+14, 0, 0));
     drawText(bottomListElements[i], bottomListCoords.left - containerCoords.left , bottomListCoords.top - containerCoords.top + 14, 0.998);
 }
 
+function update() {
+    Letters.forEach(letter => letter.update());
+}
+
+function draw() {
+    ctx.clearRect(0, 0, 800, 2000);
+    Letters.forEach(letter => letter.draw());
+}
+
+function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+}
+
+loop();
 
