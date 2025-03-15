@@ -1,0 +1,78 @@
+body {
+    font-size: 12pt;
+    margin: 0;
+    padding: 20px;
+    color: rgb(196, 88, 88)
+}
+.container {
+    width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+.header {
+    text-align: center;
+    padding: 0px 0;
+}
+.header h1 {
+    font-size: 30px;
+    margin: 10px;
+}
+.left-list {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.right-list {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: right;
+}
+.section-title {
+    font-weight: bold;
+    font-size: 16pt;
+    float:left;
+    margin-bottom: 4px;
+}
+.left-right {
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+.info-left {
+    float: left;
+    font-weight: bold;
+}
+.info-right {
+    float: right;
+}
+.bottom-list {
+    list-style: none;
+    clear: both;
+    padding-left: 0px;
+    margin-top: 0px;
+}
+
+.bullet {
+    list-style: "• ";
+    margin-left: 10px;
+    margin-bottom: 0px;
+}
+
+#myCanvas {
+    
+    position: absolute;
+    margin: 0, auto;
+
+    top:0;
+    left:0;
+    bottom:0;
+    padding:0;
+
+}

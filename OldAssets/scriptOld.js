@@ -16,7 +16,9 @@ function setupCanvas(canvas) {
   
   // Now this line will be the same size on the page
   // but will look sharper on high-DPI devices!
-const ctx = setupCanvas(document.getElementById("myCanvas"));
+const ctx = document.getElementById("myCanvas").getContext('2d');
+
+
 
 //const ctx = document.getElementById("myCanvas").getContext("2d");
 canvas = document.getElementById("myCanvas");
@@ -31,8 +33,8 @@ const title = document.body.getElementsByClassName("header")[0].childNodes[1];
 let Letters = [];
 
 const mouseStrength = 0;
-const gravity = .51;
-const drag = .1;
+const gravity = 0;
+const drag = 0;
 
 let mouse = { x: 0, y: 0 };
 
@@ -48,17 +50,17 @@ class Letter {
         this.y = y;
         this.letter = letter;
         this.rotation = 0.03;
-        this.radius = 1;
+        this.radius = 10;
         this.velocityX = velx;
         this.velocityY = vely;
         this.font = font;
     }
 
     update() {
-        let dx = this.x - mouse.x;
-        let dy = this.y - mouse.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-        let angle = Math.atan2(dy, dx);
+        //let dx = this.x - mouse.x;
+        //let dy = this.y - mouse.y;
+        //let distance = Math.sqrt(dx * dx + dy * dy);
+        //let angle = Math.atan2(dy, dx);
 
         //let ddx = Math.max(-10, Math.min(10, (mouseStrength*Math.cos(angle)/(distance*distance))));
         //let ddy = Math.max(-10, Math.min(10,(mouseStrength*Math.sin(angle)/(distance*distance))));
@@ -70,19 +72,19 @@ class Letter {
 
         if (this.y + this.radius > canvas.height) {
             this.y = canvas.height - this.radius;
-            this.velocityY *= -1;
+            this.velocityY *= -.5;
         }
         if (this.y - this.radius < 0) {
             this.y = this.radius;
-            this.velocityY *= -1;
+            this.velocityY *= -.5;
         }
         if (this.x + this.radius > canvas.width) {
             this.x = canvas.width - this.radius;
-            this.velocityX *= -1;
+            this.velocityX *= -.5;
         }
         if (this.x - this.radius < 0) {
             this.x = this.radius;
-            this.velocityX *= -1;
+            this.velocityX *= -0.5;
         }
         
     }
