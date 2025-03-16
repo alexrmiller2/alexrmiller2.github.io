@@ -1,0 +1,150 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times new Roman';
+
+    letter-spacing: 0.01em;
+    ;
+
+}
+
+body {
+    font-size: 90%;
+    overflow-x: scroll;
+}
+
+section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 1.5em;
+    padding-top: 0;
+    overflow: scroll;
+}
+
+.limitWidth {
+    max-width: 55em;
+    min-width: 38em;
+}
+
+.sticky {
+    background-color: white;
+    color: black;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.contact1,
+.name,
+.contact2 {
+    float: left;
+    height: 4em;
+}
+
+.name {
+
+    width: 40%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.name h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+}
+
+.contact1,
+.contact2 {
+    width: 30%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.contact1 ul,
+.contact2 ul {
+    width: 100%;
+}
+
+.contact1 li {
+    width: 100%;
+    text-align: left;
+    list-style-type: none;
+    padding-top: 0.25em;
+    font-size: 1em;
+}
+
+.contact2 li {
+    width: 100%;
+    text-align: right;
+    list-style-type: none;
+    font-size: 1em;
+}
+
+.sectionTitle {
+    float: left;
+    width: 100%;
+    height: 1em;
+    font-size: 1.25em;
+    margin-top: .5em;
+    font-weight: bold;
+}
+
+.subTitle {
+    float: left;
+    height: 1em;
+    width: 75%;
+    margin-top: 0.5em;
+    font-size: 1em;
+}
+
+.dateRange {
+    float: left;
+    height: 1em;
+    width: 25%;
+    text-align: right;
+    margin-top: 0.5em;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+
+.sticky p {
+    text-align: left;
+}
+
+.bullet {
+    margin-top: 0.25em;
+    float: left;
+    font-weight: normal;
+    font-size: 1em;
+
+}
+
+.item {
+    display: inline-block;
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+}
+
+
+#enablePhysicsButton {
+    display: block;
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+
+    font-size: 1em;
+}
+
+#disablePhysicsButton {
+    display: block;
+    position: absolute;
+    bottom: 3em;
+    right: 1em;
+    font-size: 1em;
+}
